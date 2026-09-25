@@ -1,108 +1,27 @@
-export { default } from "./dashboard";
+import Link from "next/link";
+import { ArrowRight, BarChart3, Calculator, Check, Gauge, ReceiptText, ShieldCheck, Target, Zap } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { PLAN_PRICE } from "@/lib/commercial";
 
-const sidebarWidths = [74, 58, 82, 66, 71, 54];
-const articleWidths = [100, 97, 94, 98, 86];
+const benefits = [
+  [Calculator, "Lucro real", "Veja o que sobra depois de combustível, manutenção, custos fixos e desgaste."],
+  [BarChart3, "Melhores dias e apps", "Compare seus resultados e descubra onde seu tempo rende mais."],
+  [ReceiptText, "MEI organizado", "Acompanhe faturamento, DAS e o limite anual sem planilha complicada."],
+  [Target, "Metas possíveis", "Defina uma meta diária e saiba quanto falta para encerrar o dia."],
+] as const;
 
-function StarterSkeleton() {
-  return (
-    <main className="fixed inset-0 overflow-hidden bg-[#fbfaf8] text-zinc-900">
-      <header
-        aria-hidden="true"
-        className="grid h-[76px] grid-cols-[1fr_auto_1fr] items-center border-b border-stone-200 bg-white/95 px-6 sm:px-14"
-      >
-        <div className="flex items-center gap-3">
-          <span className="h-9 w-9 rounded-full bg-stone-100" />
-          <span className="h-3.5 w-28 rounded-full bg-stone-100" />
-        </div>
-        <span className="hidden h-9 w-[min(30vw,420px)] rounded-xl bg-stone-100 sm:block" />
-        <div className="flex items-center justify-end gap-3">
-          <span className="hidden h-9 w-9 rounded-full bg-stone-100 sm:block" />
-          <span className="h-9 w-24 rounded-xl bg-stone-100" />
-        </div>
-      </header>
-
-      <div
-        aria-hidden="true"
-        className="grid h-[calc(100%-76px)] grid-cols-[180px_minmax(0,1fr)_260px] gap-10 px-6 pb-24 pt-10 opacity-55 max-lg:grid-cols-[150px_minmax(0,1fr)] max-sm:grid-cols-1 sm:px-14"
-      >
-        <aside className="hidden border-r border-stone-200 pr-7 sm:block">
-          <div className="mb-6 h-2.5 w-16 rounded-full bg-stone-200" />
-          <div className="space-y-4">
-            {sidebarWidths.map((width) => (
-              <div key={width} className="flex items-center gap-3">
-                <span className="h-4 w-4 rounded bg-stone-200" />
-                <span
-                  className="h-2.5 rounded-full bg-stone-200"
-                  style={{ width: `${width}%` }}
-                />
-              </div>
-            ))}
-          </div>
-          <div className="mb-6 mt-9 h-2.5 w-24 rounded-full bg-stone-200" />
-          <div className="space-y-4">
-            {sidebarWidths.slice(0, 3).map((width) => (
-              <span
-                key={width}
-                className="block h-2.5 rounded-full bg-stone-200"
-                style={{ width: `${width}%` }}
-              />
-            ))}
-          </div>
-        </aside>
-
-        <article className="mx-auto flex w-full max-w-3xl flex-col gap-6">
-          <div className="space-y-3">
-            <div className="h-2.5 w-28 rounded-full bg-stone-200" />
-            <div className="h-7 w-4/5 rounded-lg bg-stone-200" />
-            <div className="h-7 w-3/5 rounded-lg bg-stone-200" />
-          </div>
-          <div className="min-h-[240px] flex-1 rounded-2xl bg-stone-200" />
-          <div className="flex items-center gap-3">
-            <span className="h-9 w-9 rounded-full bg-stone-200" />
-            <span className="h-2.5 w-28 rounded-full bg-stone-200" />
-          </div>
-          <div className="space-y-2">
-            {articleWidths.map((width) => (
-              <span
-                key={width}
-                className="block h-2.5 rounded-full bg-stone-200"
-                style={{ width: `${width}%` }}
-              />
-            ))}
-          </div>
-        </article>
-
-        <aside className="space-y-5 max-lg:hidden">
-          {[0, 1].map((card) => (
-            <div
-              key={card}
-              className="space-y-4 rounded-2xl border border-stone-200 bg-white/70 p-6"
-            >
-              <span className="block h-10 w-10 rounded-full bg-stone-200" />
-              <span className="block h-3 w-3/5 rounded-full bg-stone-200" />
-              <span className="block h-2.5 w-full rounded-full bg-stone-200" />
-              <span className="block h-2.5 w-4/5 rounded-full bg-stone-200" />
-              <span className="block h-8 w-24 rounded-lg bg-stone-200" />
-            </div>
-          ))}
-        </aside>
-      </div>
-
-      <output
-        aria-live="polite"
-        aria-atomic="true"
-        className="absolute left-1/2 top-[clamp(96px,13vh,122px)] w-[min(620px,calc(100%-40px))] -translate-x-1/2 rounded-[18px] border border-stone-200 bg-white/95 px-5 py-5 shadow-[0_18px_50px_rgb(24_24_27/9%)] backdrop-blur-sm"
-      >
-        <p className="mb-1 text-[11px] font-semibold uppercase tracking-[0.09em] text-stone-500">
-          Building your site
-        </p>
-        <h1 className="text-xl font-semibold tracking-tight">
-          Your site is taking shape
-        </h1>
-        <p className="mt-1 text-sm text-stone-500">
-          Your first version will appear here automatically when it’s ready.
-        </p>
-      </output>
-    </main>
-  );
+export default function HomePage() {
+  return <main className="min-h-screen overflow-hidden bg-[#f3f5f2] text-[#11251f]">
+    <header className="border-b border-[#dce2dd] bg-white/90 backdrop-blur-xl"><div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-8"><Brand /><div className="flex items-center gap-2"><Button asChild variant="ghost" className="rounded-xl font-bold"><Link href="/sign-in">Entrar</Link></Button><Button asChild className="rounded-xl bg-[#11251f] px-5 font-black text-white"><Link href="/sign-up">Criar conta</Link></Button></div></div></header>
+    <section className="relative mx-auto grid max-w-7xl gap-12 px-5 py-16 sm:px-8 lg:grid-cols-[1.06fr_.94fr] lg:items-center lg:py-24">
+      <div><span className="inline-flex items-center gap-2 rounded-full bg-[#e5f9ad] px-4 py-2 text-sm font-black"><Zap className="size-4" /> Feito para motorista de aplicativo</span><h1 className="mt-6 max-w-3xl text-[clamp(3rem,7vw,5.8rem)] font-black leading-[.91] tracking-[-.07em]">Pare de trabalhar no escuro.</h1><p className="mt-6 max-w-xl text-lg font-semibold leading-8 text-[#5f7069] sm:text-xl">Descubra quanto você lucra de verdade depois de combustível, manutenção, impostos e custos do carro.</p><div className="mt-8 flex flex-col gap-3 sm:flex-row"><Button asChild className="h-14 rounded-2xl bg-[#c8ff39] px-7 text-base font-black text-[#11251f] hover:bg-[#b9ef31]"><Link href="/sign-up">Começar agora <ArrowRight /></Link></Button><Button asChild variant="outline" className="h-14 rounded-2xl border-[#cbd4cf] bg-white px-7 text-base font-black"><Link href="#como-funciona">Ver como funciona</Link></Button></div><div className="mt-7 flex flex-wrap gap-x-5 gap-y-2 text-sm font-bold text-[#607069]"><span className="flex items-center gap-2"><Check className="size-4 text-[#4a9c4d]" /> Sem fidelidade</span><span className="flex items-center gap-2"><Check className="size-4 text-[#4a9c4d]" /> Cancele quando quiser</span><span className="flex items-center gap-2"><ShieldCheck className="size-4 text-[#4a9c4d]" /> Login protegido</span></div></div>
+      <div className="relative"><div className="absolute -inset-8 rounded-full bg-[#c8ff39]/25 blur-3xl" /><div className="relative overflow-hidden rounded-[34px] bg-[#11251f] p-6 text-white shadow-[0_30px_90px_rgba(17,37,31,.28)] sm:p-8"><div className="flex items-center justify-between"><div><p className="text-sm font-bold text-white/55">Lucro estimado hoje</p><p className="mt-2 text-5xl font-black tracking-[-.06em]">R$ 147,17</p></div><div className="grid size-14 place-items-center rounded-2xl bg-[#c8ff39] text-[#11251f]"><Gauge className="size-8" /></div></div><div className="mt-8 h-3 overflow-hidden rounded-full bg-white/10"><div className="h-full w-[74%] rounded-full bg-[#c8ff39]" /></div><div className="mt-3 flex justify-between text-sm font-bold text-white/50"><span>R$ 147,17</span><span>Meta R$ 200</span></div><div className="mt-8 grid grid-cols-2 gap-3"><Metric label="Ganhos" value="R$ 320,00" /><Metric label="Gastos e custos" value="R$ 172,83" /><Metric label="Por hora" value="R$ 18,40" /><Metric label="Por km" value="R$ 0,82" /></div><div className="mt-6 rounded-2xl bg-white/7 p-4"><p className="text-xs font-black uppercase tracking-wider text-[#c8ff39]">Sua decisão fica simples</p><p className="mt-1 font-bold">Você já sabe se vale continuar rodando hoje.</p></div></div></div>
+    </section>
+    <section id="como-funciona" className="bg-white py-20"><div className="mx-auto max-w-7xl px-5 sm:px-8"><p className="text-sm font-black uppercase tracking-[.18em] text-[#56811c]">Tudo em poucos toques</p><h2 className="mt-3 max-w-2xl text-4xl font-black tracking-[-.05em] sm:text-5xl">Controle simples para quem passa o dia na rua.</h2><div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">{benefits.map(([Icon,title,description])=><article key={title} className="rounded-[26px] border border-[#e1e7e3] bg-[#f8faf7] p-6"><div className="grid size-12 place-items-center rounded-2xl bg-[#e7ff9c]"><Icon className="size-6" /></div><h3 className="mt-5 text-xl font-black">{title}</h3><p className="mt-2 text-sm font-semibold leading-6 text-[#68766f]">{description}</p></article>)}</div></div></section>
+    <section className="mx-auto max-w-5xl px-5 py-20 sm:px-8"><div className="grid overflow-hidden rounded-[34px] bg-[#ffd44d] lg:grid-cols-[1fr_auto]"><div className="p-7 sm:p-10"><p className="text-sm font-black uppercase tracking-[.16em] text-[#69570f]">Preço de lançamento</p><h2 className="mt-3 text-4xl font-black tracking-[-.05em]">Seu lucro real custa menos que uma corrida.</h2><p className="mt-4 max-w-xl font-semibold leading-7 text-[#65591f]">Acesso completo ao painel, histórico, metas e organização do MEI.</p><ul className="mt-6 grid gap-3 text-sm font-bold sm:grid-cols-2">{["Registros ilimitados","Cálculo por hora e km","Painel MEI","Suporte direto"].map(x=><li key={x} className="flex items-center gap-2"><Check className="size-4" />{x}</li>)}</ul></div><div className="flex min-w-[300px] flex-col justify-center bg-[#11251f] p-8 text-white sm:p-10"><p className="text-sm font-bold text-white/55">Plano Completo</p><p className="mt-2 text-5xl font-black tracking-[-.06em]">R$ {PLAN_PRICE.toFixed(2).replace('.', ',')}</p><p className="mt-1 font-semibold text-white/55">por 30 dias</p><Button asChild className="mt-7 h-14 rounded-2xl bg-[#c8ff39] text-base font-black text-[#11251f]"><Link href="/sign-up">Assinar com Pix <ArrowRight /></Link></Button></div></div></section>
+    <footer className="border-t border-[#dce2dd] bg-white"><div className="mx-auto flex max-w-7xl flex-col gap-4 px-5 py-8 text-sm font-semibold text-[#718079] sm:flex-row sm:items-center sm:justify-between sm:px-8"><Brand /><p>© 2026 Lucro no Volante · Marcos Ruan</p></div></footer>
+  </main>;
 }
+
+function Brand(){return <Link href="/" className="flex items-center gap-3"><span className="grid size-10 place-items-center rounded-[14px] bg-[#c8ff39]"><Gauge className="size-6" strokeWidth={2.7}/></span><span className="font-black leading-4">Lucro no<br/><span className="text-[#63901d]">Volante</span></span></Link>}
+function Metric({label,value}:{label:string;value:string}){return <div className="rounded-2xl bg-white/7 p-4"><p className="text-xs font-bold text-white/45">{label}</p><p className="mt-1 text-lg font-black">{value}</p></div>}
